@@ -4,25 +4,8 @@ Inför workshopen så vill vi att Claude Code ska vara installerat på er maskin
 Här kommer en guide för hur man installerar claude code.
 Slutmålet för den här guiden är claude code är installerat (med optional claude code i VSCode installerat) och en ny projektmapp skapad med claude code körandes.
 
+Om du kommer från windows, installera först [WSL](#WSL)
 
-
-# Windows specifikt:
-Windows: installera WSL
-
-Öppna PowerShell som administratör och kör:
-
-```
-wsl --install
-  
-```
-
-Starta om vid behov. Öppna Ubuntu från Start-menyn och sätt upp användare.
-
-
-```
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y git curl unzip ca-certificates
-```
 
 # Verifiera Node Version
 
@@ -75,7 +58,7 @@ lägg in dessa miljövariablerna
 
 ```
 export ANTHROPIC_API_KEY=<KEY>
-export ANTHROPIC_CUSTOM_HEADERS="x-api-key: $ANTHOPRIC_API_KEY"
+export ANTHROPIC_CUSTOM_HEADERS="x-api-key: $ANTHROPIC_API_KEY"
 export ANTHROPIC_BASE_URL="https://claude-router.platform.datadrivet.ai"
 ```
 
@@ -100,7 +83,7 @@ och lägg till raden
   "hasCompletedOnboarding": true,
 ```
 
-någonstans i din claude konfiguration, så att den ser ut såhär:
+någonstans i din claude konfiguration på lägsta nivån i json-objektet, så att den ser ut såhär:
 
 ```
 {
@@ -110,7 +93,7 @@ någonstans i din claude konfiguration, så att den ser ut såhär:
     "tengu_disable_bypass_permissions_mode": false
   },
   "firstStartTime": "2025-09-15T10:29:37.502Z",
-  "hasOnboardingCompleted": true,
+  "hasCompletedOnboarding": true,
   "userID": "SECRET",
   "projects": {
     "/home/afredojala/repos/help-me": {
@@ -195,3 +178,23 @@ Gå senare till extension och sök på claude code. Installera claude code och s
 
 
 ![vscode-extension](imgs/vscode.jpg)
+
+
+
+
+# WSL
+
+Öppna PowerShell som administratör och kör:
+
+```
+wsl --install
+  
+```
+
+Starta om vid behov. Öppna Ubuntu från Start-menyn och sätt upp användare.
+
+
+```
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl unzip ca-certificates
+```
