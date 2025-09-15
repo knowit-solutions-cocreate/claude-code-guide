@@ -126,6 +126,7 @@ och starta claude code med
 claude 
 ```
 
+Lite på din API-nyckel och lita på mappen du är i (Tryck yes på båda alternativen)
 när claude är igång,
 
 kör
