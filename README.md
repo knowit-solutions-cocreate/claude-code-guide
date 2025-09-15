@@ -7,6 +7,9 @@ Slutmålet för den här guiden är claude code är installerat (med optional cl
 Om du kommer från windows, installera först [WSL](#WSL)
 
 
+Vid frågor eller problem, Kontakta Andreas Fred-Ojala
+
+
 # Verifiera Node Version
 
 Säkerställ Node/npm-version (Linux, WSL, macOS)
@@ -66,10 +69,13 @@ där `<KEY>` går att hämta från vår [vault](https://vault.platform.datadrive
 Gå in på din användare (user-DITTNAMN), klicka på openrouter och välj sedan secret. Där finns ett attribut som heter "api_key"
 
 
-När du har ändrat i din `~/.bashrc` (eller zshrc), ladda om dina förändringar med
+![vault](imgs/vault.jpg)
+
+
+När du har ändrat i din `~/.bashrc` (eller zshrc) starta en ny terminal
 
 ```
-source ~/.bashrc # Eller .zshrc)
+source ~/.bashrc # Eller .zshrc
 
 ```
 
@@ -162,7 +168,7 @@ Model • /model
 då kan du pröva att skriva "Hello" och claude svarar på något sätt
 
 
-# Installera claude code i VSCode
+# Installera claude code i VSCode (Optional)
 
 Om du vill köra claude code i VSCode kommer här en enkel instruktion
 
@@ -190,6 +196,9 @@ Gå senare till extension och sök på claude code. Installera claude code och s
 
 
 
+### Färdig installation
+
+Nu när du har installerat allting kan du skicka en tumme upp till Andreas Fred-Ojala, så att vi vet att allting är igång för dig
 
 # WSL
 
