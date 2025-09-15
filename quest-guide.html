@@ -237,6 +237,13 @@
 
         <div class="content">
             <div class="instructions">
+                <p>
+                    Har du redan Claude Code installerat? Bra!<br />
+                    Då behöver du bara slutföra steget "Konfigurera API-nycklar".
+                </p>
+            </div>
+            <div class="instructions">
+
                 <strong>Instruktioner:</strong>
                 <ul style="margin-left: 20px; margin-top: 10px;">
                     <li>Klicka på varje quest för att visa detaljer</li>
@@ -354,8 +361,22 @@ npm --version</pre>
                     <p><strong>Installera Claude Code:</strong></p>
                     <pre>npm install -g @anthropic-ai/claude-code</pre>
                     <p><strong>Verifiera installationen:</strong></p>
-                    <pre>claude --version</pre>
+                    <pre>claude hello</pre>
+                    <p>
+                        Du ska se något i stil med detta:
+                        <pre>> hello
+⏺ Hello! How can I help you with your software engineering tasks today?
+                        </pre>
+                    </p>
+
+                    <div class="warning">
+                        Om du redan hade Claude Code installerat så finns det en risk att dina tidigare nycklar och authentiseringsmetoder krockar med API-nycklarna vi konfigurerade ovan.
+                        En lösning är att flytta  ~/.claude och ~/.claude.json åt sidan: mv ~/.claude .claude-backup && mv ~/.claude.json ~/.claude.json-backup.
+                    </div>
+
                 </div>
+
+
             </div>
 
             <!-- Bypass Onboarding Quest -->
