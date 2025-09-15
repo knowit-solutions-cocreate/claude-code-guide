@@ -74,11 +74,13 @@ Gå in på din användare (user-DITTNAMN), klicka på openrouter och välj sedan
 
 När du har ändrat i din `~/.bashrc` (eller zshrc) starta en ny terminal
 
-```
-source ~/.bashrc # Eller .zshrc
+och kolla så att dina miljövariabler existerar
 
 ```
+printenv | grep ANTHROPIC
+```
 
+och det ska skrivas ut de tre variablerna vi skrev in ovan.
 
 ## Bypassa Onboarding (kanske inget måste)
 
