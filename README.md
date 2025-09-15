@@ -66,6 +66,14 @@ där `<KEY>` går att hämta från vår [vault](https://vault.platform.datadrive
 Gå in på din användare (user-DITTNAMN), klicka på openrouter och välj sedan secret. Där finns ett attribut som heter "api_key"
 
 
+När du har ändrat i din `~/.bashrc` (eller zshrc), ladda om dina förändringar med
+
+```
+source ~/.bashrc # Eller .zshrc)
+
+```
+
+
 ## Bypassa Onboarding (kanske inget måste)
 
 Vid första starten kan Claude Code visa en onboarding screen där man får välja mellan två val (Visas efter man valt färgtemat).
