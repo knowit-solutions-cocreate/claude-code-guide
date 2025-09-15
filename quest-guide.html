@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Installation Quest</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .quest {
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            margin: 20px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .quest:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .quest-header {
+            padding: 20px;
+            background: linear-gradient(90deg, #ecf0f1, #bdc3c7);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quest-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .quest-checkbox:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .quest-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .quest-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .quest-content.show {
+            display: block;
+        }
+
+        .completed {
+            opacity: 0.6;
+            filter: grayscale(80%);
+            background: #f0f0f0;
+        }
+
+        .completed .quest-header {
+            background: linear-gradient(90deg, #e8e8e8, #d0d0d0);
+        }
+
+        .completed .quest-checkbox {
+            background: #27ae60;
+            border-color: #27ae60;
+            color: white;
+        }
+
+        .completed .quest-checkbox::after {
+            content: "✓";
+            font-weight: bold;
+        }
+
+        .side-quest {
+            border-left-color: #f39c12;
+            background: #fef9e7;
+        }
+
+        .side-quest .quest-header {
+            background: linear-gradient(90deg, #fef9e7, #f1c40f);
+        }
+
+        .side-quest .quest-checkbox {
+            border-color: #f39c12;
+        }
+
+        .side-quest .quest-title::before {
+            content: "⭐ ";
+            color: #f39c12;
+        }
+
+        .side-quest .quest-title::after {
+            content: " (Valfri)";
+            font-size: 0.8em;
+            color: #f39c12;
+            font-weight: normal;
+        }
+
+        code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning::before {
+            content: "⚠️ ";
+            font-weight: bold;
+        }
+
+        .final-quest {
+            border-left-color: #27ae60;
+            background: #eafaf1;
+        }
+
+        .final-quest .quest-header {
+            background: linear-gradient(90deg, #eafaf1, #27ae60);
+        }
+
+        .final-quest .quest-checkbox {
+            border-color: #27ae60;
+        }
+
+        .final-quest .quest-title::before {
+            content: "🏆 ";
+        }
+
+        .instructions {
+            background: #e8f4fd;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .contact {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Claude Code Installation Quest</h1>
+            <p>Slutför alla quest för att förbereda dig inför workshopen</p>
+        </div>
+
+        <div class="content">
+            <div class="instructions">
+                <strong>Instruktioner:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Klicka på varje quest för att visa detaljer</li>
+                    <li>Klicka på kryssrutan när du slutfört ett quest</li>
+                    <li>Slutförda quest döljs automatiskt</li>
+                    <li>⭐ Valfria quest kan hoppas över</li>
+                </ul>
+            </div>
+
+            <div class="contact">
+                <strong>🆘 Behöver du hjälp?</strong><br>
+                Kontakta Andreas Fred-Ojala vid frågor eller problem
+            </div>
+
+            <!-- Windows WSL Side Quest -->
+            <div class="quest side-quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Installera WSL (Windows användare)</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest för Windows-användare:</strong> Installera Windows Subsystem for Linux</p>
+                    <div class="warning">
+                        Detta quest krävs endast om du använder Windows. Mac och Linux användare kan hoppa över.
+                    </div>
+                    <p><strong>Steg:</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>Öppna PowerShell som administratör</li>
+                        <li>Kör kommandot:</li>
+                    </ol>
+                    <pre>wsl --install</pre>
+                    <ol start="3" style="margin-left: 20px;">
+                        <li>Starta om datorn vid behov</li>
+                        <li>Öppna Ubuntu från Start-menyn och sätt upp användare</li>
+                        <li>Uppdatera systemet:</li>
+                    </ol>
+                    <pre>sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl unzip ca-certificates</pre>
+                </div>
+            </div>
+
+            <!-- Node Version Quest -->
+            <div class="quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Verifiera Node Version</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Säkerställ att Node.js version 18+ och npm är installerat</p>
+                    <p><strong>Verifiera din installation:</strong></p>
+                    <pre>node -v
+npm -v</pre>
+                    <div class="warning">
+                        Om Node version är större än 18 och npm finns tillgängligt kan du hoppa över nästa quest.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Install Node Quest -->
+            <div class="quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Installera Node >= 18</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Installera Node.js version 18 eller senare via nvm</p>
+                    <p><strong>Installera nvm och Node:</strong></p>
+                    <pre>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc    # eller ~/.zshrc på macOS
+nvm install --lts
+nvm use --lts</pre>
+                    <p><strong>Verifiera installationen:</strong></p>
+                    <pre>node -v
+npm -v</pre>
+                </div>
+            </div>
+
+            <!-- Install Claude Code Quest -->
+            <div class="quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Installera Claude Code</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Installera Claude Code globalt via npm</p>
+                    <p><strong>Installera Claude Code:</strong></p>
+                    <pre>npm install -g @anthropic-ai/claude-code</pre>
+                    <p><strong>Verifiera installationen:</strong></p>
+                    <pre>claude --version</pre>
+                </div>
+            </div>
+
+            <!-- API Keys Quest -->
+            <div class="quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Konfigurera API-nycklar</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Sätt upp miljövariabler för API-åtkomst</p>
+                    <p><strong>Redigera din shell-konfiguration:</strong></p>
+                    <p>Öppna <code>~/.bashrc</code> (eller <code>~/.zshrc</code> på macOS) och lägg till:</p>
+                    <pre>export ANTHROPIC_API_KEY=&lt;KEY&gt;
+export ANTHROPIC_CUSTOM_HEADERS="x-api-key: $ANTHROPIC_API_KEY"
+export ANTHROPIC_BASE_URL="https://claude-router.platform.datadrivet.ai"</pre>
+                    <p><strong>Hämta din API-nyckel:</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>Gå till <a href="https://vault.platform.datadrivet.ai/ui/vault/secrets/onyxia-kv/kv/list">vault</a></li>
+                        <li>Klicka på din användare (user-DITTNAMN)</li>
+                        <li>Klicka på "openrouter" och välj "secret"</li>
+                        <li>Kopiera värdet från "api_key"</li>
+                    </ol>
+                    <p><strong>Testa konfigurationen:</strong></p>
+                    <p>Starta en ny terminal och kör:</p>
+                    <pre>printenv | grep ANTHROPIC</pre>
+                    <p>Du ska se alla tre variablerna listade.</p>
+                </div>
+            </div>
+
+            <!-- Bypass Onboarding Quest -->
+            <div class="quest side-quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Bypassa Onboarding</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Förhindra onboarding-skärm från att visas</p>
+                    <div class="warning">
+                        Detta quest behövs endast om Claude Code visar en onboarding-skärm vid första start.
+                    </div>
+                    <p><strong>Om onboarding visas:</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>Stäng Claude Code med Ctrl+C Ctrl+C (snabbt två gånger)</li>
+                        <li>Redigera <code>~/.claude.json</code></li>
+                        <li>Lägg till denna rad i JSON-objektet:</li>
+                    </ol>
+                    <pre>"hasCompletedOnboarding": true,</pre>
+                </div>
+            </div>
+
+            <!-- Create Project Quest -->
+            <div class="quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Skapa projekt och validera Claude Code</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Skapa en projektmapp och testa Claude Code</p>
+                    <p><strong>Skapa projektmapp:</strong></p>
+                    <pre>mkdir vibe-coding && cd vibe-coding</pre>
+                    <p><strong>Starta Claude Code:</strong></p>
+                    <pre>claude</pre>
+                    <p><strong>Acceptera behörigheter:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Lita på din API-nyckel (tryck yes)</li>
+                        <li>Lita på mappen du är i (tryck yes)</li>
+                    </ul>
+                    <p><strong>Testa installationen:</strong></p>
+                    <p>När Claude är igång, kör:</p>
+                    <pre>/status</pre>
+                    <p>Du ska se utdata liknande:</p>
+                    <pre>Account
+ └ Auth Token: none
+ └ API Key: ANTHROPIC_API_KEY
+
+API Configuration
+ └ Anthropic Base URL: https://claude-router.platform.datadrivet.ai
+
+Model • /model
+ └ Default (claude-sonnet-4-20250514)</pre>
+                    <p><strong>Sluttest:</strong> Skriv "Hello" och se att Claude svarar</p>
+                </div>
+            </div>
+
+            <!-- VSCode Installation Side Quest -->
+            <div class="quest side-quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Installera Claude Code i VSCode</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Installera Claude Code extension i VSCode</p>
+                    <p><strong>Installera VSCode (om inte redan installerat):</strong></p>
+                    <p>Ladda ner från: <a href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></p>
+                    <p><strong>Öppna VSCode från ditt projekt:</strong></p>
+                    <p>Gå till vibe-coding mappen och kör:</p>
+                    <pre>code .</pre>
+                    <div class="warning">
+                        Windows-användare: Se till att köra detta från din WSL-instans!
+                    </div>
+                    <p><strong>Installera Claude Code extension:</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>Gå till Extensions panel i VSCode</li>
+                        <li>Sök på "claude code"</li>
+                        <li>Installera Claude Code extension</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Final Quest -->
+            <div class="quest final-quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Slutför installationen</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Bekräfta att allt fungerar</p>
+                    <p><strong>Du har slutfört installationen när:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Claude Code startar utan fel</li>
+                        <li>/status visar korrekt konfiguration</li>
+                        <li>Claude svarar på meddelanden</li>
+                    </ul>
+                    <p><strong>🎉 Grattis!</strong></p>
+                    <p>Skicka en tumme upp till Andreas Fred-Ojala för att bekräfta att din installation är klar!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleQuest(header) {
+            const content = header.nextElementSibling;
+            const isVisible = content.classList.contains('show');
+
+            // Close all other quests
+            document.querySelectorAll('.quest-content').forEach(c => c.classList.remove('show'));
+
+            // Toggle current quest
+            if (!isVisible) {
+                content.classList.add('show');
+            }
+        }
+
+        function toggleComplete(event, checkbox) {
+            event.stopPropagation();
+            const quest = checkbox.closest('.quest');
+            const isCompleted = quest.classList.contains('completed');
+
+            if (isCompleted) {
+                quest.classList.remove('completed');
+                localStorage.removeItem('quest-' + getQuestId(quest));
+            } else {
+                quest.classList.add('completed');
+                localStorage.setItem('quest-' + getQuestId(quest), 'completed');
+            }
+        }
+
+        function getQuestId(quest) {
+            return quest.querySelector('.quest-title').textContent.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+        }
+
+        // Load saved progress
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.quest').forEach(quest => {
+                const questId = getQuestId(quest);
+                if (localStorage.getItem('quest-' + questId) === 'completed') {
+                    quest.classList.add('completed');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
