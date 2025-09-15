@@ -167,6 +167,20 @@
             margin: 10px 0;
         }
 
+        .green-warning {
+            background: lime;
+            border: 1px solid green;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .green-warning::before {
+            content: "⚠️ ";
+            font-weight: bold;
+        }
+
+
         .warning {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -237,6 +251,8 @@
                 Kontakta Andreas Fred-Ojala vid frågor eller problem
             </div>
 
+
+
             <!-- Windows WSL Side Quest -->
             <div class="quest side-quest">
                 <div class="quest-header" onclick="toggleQuest(this)">
@@ -264,30 +280,51 @@ sudo apt install -y git curl unzip ca-certificates</pre>
                 </div>
             </div>
 
+
+            <!-- API Keys Quest -->
+            <div class="quest">
+                <div class="quest-header" onclick="toggleQuest(this)">
+                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
+                    <div class="quest-title">Konfigurera API-nycklar</div>
+                </div>
+                <div class="quest-content">
+                    <p><strong>Quest mål:</strong> Sätt upp miljövariabler för API-åtkomst</p>
+
+                    <p><strong>Hämta din API-nyckel:</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>Gå till <a href="https://vault.platform.datadrivet.ai/ui/vault/secrets/onyxia-kv/kv/list">vault</a></li>
+                        <li>Klicka på din användare (user-DITTNAMN)</li>
+                        <li>Klicka på "openrouter" och välj "secret"</li>
+                        <li>Kopiera värdet från "api_key"</li>
+                    </ol>
+
+                    <p><strong>Redigera din shell-konfiguration:</strong></p>
+                    <p>Öppna <code>~/.bashrc</code> (eller <code>~/.zshrc</code> på macOS) och lägg till:</p>
+                    <pre>export ANTHROPIC_API_KEY=&lt;KEY&gt;
+export ANTHROPIC_CUSTOM_HEADERS="x-api-key: $ANTHROPIC_API_KEY"
+export ANTHROPIC_BASE_URL="https://claude-router.platform.datadrivet.ai"</pre>
+                    <p><strong>Testa konfigurationen:</strong></p>
+                    <p>Starta en ny terminal och kör:</p>
+                    <pre>printenv | grep ANTHROPIC</pre>
+                    <p>Du ska se alla tre variablerna listade.</p>
+                </div>
+            </div>
+
             <!-- Node Version Quest -->
             <div class="quest">
                 <div class="quest-header" onclick="toggleQuest(this)">
                     <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
-                    <div class="quest-title">Verifiera Node Version</div>
+                    <div class="quest-title">Verifiera att du har Node installerat</div>
                 </div>
                 <div class="quest-content">
                     <p><strong>Quest mål:</strong> Säkerställ att Node.js version 18+ och npm är installerat</p>
                     <p><strong>Verifiera din installation:</strong></p>
-                    <pre>node -v
-npm -v</pre>
-                    <div class="warning">
-                        Om Node version är större än 18 och npm finns tillgängligt kan du hoppa över nästa quest.
+                    <pre>node --version
+npm --version</pre>
+                    <div class="green-warning">
+                        Om Node version är större än 18 och npm finns tillgängligt har du lyckats redan innan du börjar!
                     </div>
-                </div>
-            </div>
 
-            <!-- Install Node Quest -->
-            <div class="quest">
-                <div class="quest-header" onclick="toggleQuest(this)">
-                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
-                    <div class="quest-title">Installera Node >= 18</div>
-                </div>
-                <div class="quest-content">
                     <p><strong>Quest mål:</strong> Installera Node.js version 18 eller senare via nvm</p>
                     <p><strong>Installera nvm och Node:</strong></p>
                     <pre>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -295,8 +332,14 @@ source ~/.bashrc    # eller ~/.zshrc på macOS
 nvm install --lts
 nvm use --lts</pre>
                     <p><strong>Verifiera installationen:</strong></p>
-                    <pre>node -v
-npm -v</pre>
+                    <pre>node --version
+npm --version</pre>
+
+                    <div class="warning">
+                        Om Node version är större än 18 och npm finns tillgängligt har du lyckats!
+                    </div>
+
+
                 </div>
             </div>
 
@@ -312,33 +355,6 @@ npm -v</pre>
                     <pre>npm install -g @anthropic-ai/claude-code</pre>
                     <p><strong>Verifiera installationen:</strong></p>
                     <pre>claude --version</pre>
-                </div>
-            </div>
-
-            <!-- API Keys Quest -->
-            <div class="quest">
-                <div class="quest-header" onclick="toggleQuest(this)">
-                    <div class="quest-checkbox" onclick="toggleComplete(event, this)"></div>
-                    <div class="quest-title">Konfigurera API-nycklar</div>
-                </div>
-                <div class="quest-content">
-                    <p><strong>Quest mål:</strong> Sätt upp miljövariabler för API-åtkomst</p>
-                    <p><strong>Redigera din shell-konfiguration:</strong></p>
-                    <p>Öppna <code>~/.bashrc</code> (eller <code>~/.zshrc</code> på macOS) och lägg till:</p>
-                    <pre>export ANTHROPIC_API_KEY=&lt;KEY&gt;
-export ANTHROPIC_CUSTOM_HEADERS="x-api-key: $ANTHROPIC_API_KEY"
-export ANTHROPIC_BASE_URL="https://claude-router.platform.datadrivet.ai"</pre>
-                    <p><strong>Hämta din API-nyckel:</strong></p>
-                    <ol style="margin-left: 20px;">
-                        <li>Gå till <a href="https://vault.platform.datadrivet.ai/ui/vault/secrets/onyxia-kv/kv/list">vault</a></li>
-                        <li>Klicka på din användare (user-DITTNAMN)</li>
-                        <li>Klicka på "openrouter" och välj "secret"</li>
-                        <li>Kopiera värdet från "api_key"</li>
-                    </ol>
-                    <p><strong>Testa konfigurationen:</strong></p>
-                    <p>Starta en ny terminal och kör:</p>
-                    <pre>printenv | grep ANTHROPIC</pre>
-                    <p>Du ska se alla tre variablerna listade.</p>
                 </div>
             </div>
 
@@ -419,6 +435,10 @@ Model • /model
                         <li>Sök på "claude code"</li>
                         <li>Installera Claude Code extension</li>
                     </ol>
+
+                    <p>
+                        Claude Code dyker upp som en ikon!
+                    </p>
                 </div>
             </div>
 
