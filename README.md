@@ -9,6 +9,8 @@ Om du kommer från windows, installera först [WSL](#WSL)
 
 Vid frågor eller problem, Kontakta Andreas Fred-Ojala
 
+Om du stöter på problem, se [Felsökning](#felsökning) längst ner i dokumentet.
+
 
 # Verifiera Node Version
 
@@ -224,3 +226,20 @@ Starta om vid behov. Öppna Ubuntu från Start-menyn och sätt upp användare.
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y git curl unzip ca-certificates
 ```
+
+# Felsökning
+
+## NPM-installationsproblem
+
+### Problem: Konfigurationsmissanpassning med NPM-installationsmetod
+**Symptom:** När du kör `claude config` eller systemdiagnostik (`/doctor`), kan du se:
+```
+⚠ Config mismatch: running npm-global but config says unknown
+```
+
+**Lösning:** Uppdatera din Claude-konfiguration för att matcha din installationsmetod:
+```bash
+claude config set --global installMethod global
+```
+
+Detta talar om för Claude att du använder den globala NPM-installationsmetoden, vilket löser missanpassningen mellan den faktiska installationen och konfigurationen.
