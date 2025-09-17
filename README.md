@@ -70,7 +70,7 @@ export ANTHROPIC_BASE_URL="https://claude-router.platform.datadrivet.ai"
 där `<KEY>` går att hämta från vår [vault](https://vault.platform.datadrivet.ai/ui/vault/secrets/onyxia-kv/kv/list).
 
 Logga in på vault: välj oidc/ fyll ej i någon roll och klicka på "Sign in with OIDC provider".
-Logga in med email + hemligtlösenord (Fråga Andreas Fred-Ojala, Jimmy Flatting).
+Logga in med email + ett hemligt lösenord (Fråga Andreas Fred-Ojala, Jimmy Flatting, Jon Erik Kemi Warghed eller Fredrik Möllerstand om lösenordet).
 
 
 Gå in på din användare (user-DITTNAMN), klicka på openrouter och välj sedan secret. Där finns ett attribut som heter "api_key"
